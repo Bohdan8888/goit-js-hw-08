@@ -84,13 +84,14 @@ const markup = images
 
 gallery.insertAdjacentHTML("beforeend", markup);
 
+gallery.addEventListener("click", event => {
+  const image = event.target;
 
+  if (!(image instanceof HTMLImageElement) || !image.dataset.source) {
+    return;
+  }
 
-gallery.addEventListener('click', event =>{
-event.preventDefault();
-const source = event.target.dataset.source;
-const instance = basicLightbox.create(
-`<img src="${source}">`
-);
+  event.preventDefault();
+  const instance = basicLightbox.create(`<img src="${image.dataset.source}">`);
   instance.show();
-  });
+});
